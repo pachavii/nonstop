@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSubbookordersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('subbookorders', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ordername')->nullable();
+            $table->unsignedinteger('subagent_id');
+            $table->integer('total');
+            $table->timestamps();
+            $table->foreign('subagent_id')->references('id')->on('subagents');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('subbookorders');
+    }
+}
